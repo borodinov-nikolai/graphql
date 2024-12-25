@@ -16,15 +16,29 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type CreateProductInput = {
+  description: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  price: Scalars['Int']['input'];
+};
+
 export type CreateUserInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createProduct: Product;
   createUser: User;
+  removeProduct?: Maybe<Product>;
   removeUser?: Maybe<User>;
+  updateProduct: Product;
   updateUser: User;
+};
+
+
+export type MutationCreateProductArgs = {
+  createProductInput: CreateProductInput;
 };
 
 
@@ -33,8 +47,18 @@ export type MutationCreateUserArgs = {
 };
 
 
+export type MutationRemoveProductArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
 export type MutationRemoveUserArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationUpdateProductArgs = {
+  updateProductInput: UpdateProductInput;
 };
 
 
@@ -42,15 +66,37 @@ export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['Int']['output']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  product?: Maybe<Product>;
+  products: Array<Maybe<Product>>;
   user?: Maybe<User>;
   users: Array<Maybe<User>>;
 };
 
 
+export type QueryProductArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
 export type QueryUserArgs = {
   id: Scalars['Int']['input'];
+};
+
+export type UpdateProductInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Int']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type UpdateUserInput = {
@@ -61,12 +107,27 @@ export type User = {
   __typename?: 'User';
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  password?: Maybe<Scalars['String']['output']>;
 };
+
+export type CreateProductMutationVariables = Exact<{
+  input: CreateProductInput;
+}>;
+
+
+export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'Product', id?: number | null, name?: string | null, description?: string | null, price?: number | null } };
+
+export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id?: number | null, name?: string | null, description?: string | null, price?: number | null } | null> };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id?: number | null, name?: string | null } | null> };
+export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id?: number | null, name?: string | null, password?: string | null } | null> };
 
 
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const CreateProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateProductInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createProductInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<CreateProductMutation, CreateProductMutationVariables>;
+export const GetProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProducts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"products"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<GetProductsQuery, GetProductsQueryVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"password"}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

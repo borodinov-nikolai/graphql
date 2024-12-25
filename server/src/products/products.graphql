@@ -1,21 +1,22 @@
 type Product {
   # Example field (placeholder)
   id: Int
-  name: Sting
+  name: String
   description: String
-  price: number
+  price: Int
 }
 
 input CreateProductInput {
-  # Example field (placeholder)
-  exampleField: Int
-  name: Sting!
+  name: String!
   description: String!
-  price: number!
+  price: Int!
 }
 
 input UpdateProductInput {
   id: Int!
+    name: String
+  description: String
+  price: Int
 }
 
 type Query {

@@ -9,11 +9,16 @@
 /* eslint-disable */
 
 export interface CreateProductInput {
-    exampleField?: Nullable<number>;
+    name: string;
+    description: string;
+    price: number;
 }
 
 export interface UpdateProductInput {
     id: number;
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    price?: Nullable<number>;
 }
 
 export interface CreateUserInput {
@@ -25,7 +30,10 @@ export interface UpdateUserInput {
 }
 
 export interface Product {
-    exampleField?: Nullable<number>;
+    id?: Nullable<number>;
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    price?: Nullable<number>;
 }
 
 export interface IQuery {
@@ -47,6 +55,7 @@ export interface IMutation {
 export interface User {
     id?: Nullable<number>;
     name?: Nullable<string>;
+    password?: Nullable<string>;
 }
 
 type Nullable<T> = T | null;

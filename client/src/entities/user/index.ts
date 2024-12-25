@@ -1,1 +1,1 @@
-export {GET_USERS} from './api'
+export {GET_USERS} from './api/user'

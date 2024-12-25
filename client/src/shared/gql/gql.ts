@@ -14,7 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "\n    query getUsers {\n        users {\n            id\n            name\n        }\n    }\n": types.GetUsersDocument,
+    "\n    mutation createProduct($input: CreateProductInput!){\n        createProduct(createProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    ": types.CreateProductDocument,
+    "\n    query getProducts {\n        products {\n            id\n            name\n            description\n            price\n        }\n    }\n    ": types.GetProductsDocument,
+    "\n    query getUsers {\n        users {\n            id\n            name\n            password\n        }\n    }\n": types.GetUsersDocument,
 };
 
 /**
@@ -34,7 +36,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query getUsers {\n        users {\n            id\n            name\n        }\n    }\n"): (typeof documents)["\n    query getUsers {\n        users {\n            id\n            name\n        }\n    }\n"];
+export function graphql(source: "\n    mutation createProduct($input: CreateProductInput!){\n        createProduct(createProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "): (typeof documents)["\n    mutation createProduct($input: CreateProductInput!){\n        createProduct(createProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query getProducts {\n        products {\n            id\n            name\n            description\n            price\n        }\n    }\n    "): (typeof documents)["\n    query getProducts {\n        products {\n            id\n            name\n            description\n            price\n        }\n    }\n    "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query getUsers {\n        users {\n            id\n            name\n            password\n        }\n    }\n"): (typeof documents)["\n    query getUsers {\n        users {\n            id\n            name\n            password\n        }\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

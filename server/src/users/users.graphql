@@ -1,6 +1,7 @@
 type User {
   id: Int
   name: String
+  password: String
 }
 
 input CreateUserInput {

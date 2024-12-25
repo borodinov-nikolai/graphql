@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { DbService } from 'src/db/db.service';
 
 @Injectable()
 export class ProductsService {
-  create(createProductInput: CreateProductInput) {
-    return 'This action adds a new product';
+  constructor(private readonly db: DbService){}
+
+  async create(createProductInput: CreateProductInput) {
+    return await this.db.product.create({
+      data: createProductInput
+    })
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll() {
+    return await this.db.product.findMany();
   }
 
   findOne(id: number) {

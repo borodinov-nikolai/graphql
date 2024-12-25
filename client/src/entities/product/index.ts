@@ -1,1 +1,1 @@
-export {createProduct} from './api'
+export {CREATE_PRODUCT, GET_PRODUCTS} from './api/product'

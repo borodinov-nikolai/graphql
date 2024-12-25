@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import ApolloProvider from "./shared/providers/apolloProvider";
-
+import ApolloProvider from "../shared/providers/apolloProvider";
+import './globals.css'
 
 
 export const metadata: Metadata = {

@@ -17,15 +17,28 @@ export class ProductsService {
     return await this.db.product.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    return await this.db.product.findUnique({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateProductInput: UpdateProductInput) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductInput: UpdateProductInput) {
+    return await this.db.product.update({
+      where: {
+        id
+      },
+      data: updateProductInput
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    return await this.db.product.delete({
+      where: {
+        id
+      }
+    })
   }
 }

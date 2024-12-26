@@ -21,6 +21,10 @@ export interface UpdateProductInput {
     price?: Nullable<number>;
 }
 
+export interface Params {
+    sort?: Nullable<string>;
+}
+
 export interface CreateUserInput {
     name?: Nullable<string>;
 }
@@ -37,7 +41,7 @@ export interface Product {
 }
 
 export interface IQuery {
-    products(): Nullable<Product>[] | Promise<Nullable<Product>[]>;
+    products(params?: Nullable<Params>): Nullable<Product>[] | Promise<Nullable<Product>[]>;
     product(id: number): Nullable<Product> | Promise<Nullable<Product>>;
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: number): Nullable<User> | Promise<Nullable<User>>;

@@ -9,13 +9,13 @@ export class ProductsResolver {
 
   @Mutation('createProduct')
   create(@Args('createProductInput') createProductInput: CreateProductInput) {
-    console.log(createProductInput)
     return this.productsService.create(createProductInput);
   }
 
   @Query('products')
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Args('params') params: {sort: 'asc' | 'desc'}) {
+    console.log(params)
+    return this.productsService.findAll(params);
   }
 
   @Query('product')

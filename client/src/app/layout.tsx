@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={'bg-[#708670]'} >
         <ApolloProvider>
         {children}
         </ApolloProvider>

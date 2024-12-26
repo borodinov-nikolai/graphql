@@ -13,8 +13,13 @@ export class ProductsService {
     })
   }
 
-  async findAll() {
-    return await this.db.product.findMany();
+  async findAll(params: {sort: 'asc' | 'desc'}) {
+    const {sort} = params || {}
+    return await this.db.product.findMany({
+       orderBy: {
+        price: sort
+       }
+    });
   }
 
   async findOne(id: number) {

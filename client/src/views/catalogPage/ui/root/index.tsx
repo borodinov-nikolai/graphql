@@ -4,10 +4,10 @@ import Catalog from '../catalog'
 import { GetProductQuery } from '@/shared/gql/graphql'
 
 
-export const HomePage = async ({products}: {products: GetProductQuery['product'][]}) => {  
+export const CatalogPage = async ({products}: {products: GetProductQuery['product'][]}) => {  
   return (
-    <main className={'bg-[#708670] mh-[100vh] pb-[80px]'} >
-      <div className={'xl:container xl:mx-auto px-3 xl:px-0 pt-[100px] '} >
+    <main className={'mh-[100vh]'} >
+      <div className={'xl:container xl:mx-auto px-[15px] xl:px-0 py-[100px] '} >
         <AddProduct/>
         <Catalog products={products} />
       </div>

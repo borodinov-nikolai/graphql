@@ -14,13 +14,17 @@ input CreateProductInput {
 
 input UpdateProductInput {
   id: Int!
-    name: String
+  name: String
   description: String
   price: Int
 }
 
+input Params {
+  sort: String
+}
+
 type Query {
-  products: [Product]!
+  products(params: Params): [Product]!
   product(id: Int!): Product
 }
 

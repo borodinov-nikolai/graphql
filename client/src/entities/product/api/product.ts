@@ -26,8 +26,8 @@ export const UPDATE_PRODUCT = graphql(`
     `)
 
 export const GET_PRODUCTS = graphql(`
-    query getProducts {
-        products {
+    query getProducts($params: Params) {
+        products(params: $params) {
             id
             name
             description

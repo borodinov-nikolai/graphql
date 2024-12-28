@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateCategoryInput {
+  email: String!
+
+  """Example field (placeholder)"""
+  login: Int!
+  password: String!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Mutation {
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createUser(createUserInput: CreateUserInput!): User!
+  removeCategory(id: Int!): Category!
+  removeUser(id: Int!): User!
+  signUp(signUpInput: SignUpInput!): Boolean!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Query {
+  categories: [Category!]!
+  category(id: Int!): Category!
+  user(id: Int!): User!
+  users: [User!]!
+}
+
+input SignUpInput {
+  email: String!
+  login: String!
+  password: String!
+}
+
+input UpdateCategoryInput {
+  email: String
+  id: Int!
+
+  """Example field (placeholder)"""
+  login: Int
+  password: String
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+type User {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}

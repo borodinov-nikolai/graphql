@@ -7,4 +7,3 @@ export class DbService extends PrismaClient implements OnModuleInit {
     await this.$connect();
   }
 }
-

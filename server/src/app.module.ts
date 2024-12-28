@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { DbModule } from './db/db.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { UsersModule } from './users/users.module';
-import { ProductsModule } from './products/products.module';
-import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CategoriesModule } from './categories/categories.module';
+import { AuthModule } from './auth/auth.module';
+import { DbModule } from './db/db.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -22,15 +22,13 @@ import { JwtModule } from '@nestjs/jwt';
   }),
   GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
-    typePaths: ['./**/*.graphql'],
-    definitions: {
-      path: join(process.cwd(), 'src/graphql.ts'),
-    }
+    autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    sortSchema: true
   }),
+  CategoriesModule,
+  AuthModule,
   DbModule,
-  UsersModule,
-  ProductsModule,
-  AuthModule
+  UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

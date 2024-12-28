@@ -14,13 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            login,\n            email,\n            password\n        }\n    }\n    ": types.SignUpDocument,
-    "\n    mutation createProduct($input: CreateProductInput!){\n        createProduct(createProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    ": types.CreateProductDocument,
-    "\n    mutation updateProduct($input: UpdateProductInput!){\n        updateProduct(updateProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    ": types.UpdateProductDocument,
-    "\n    query getProducts($params: Params) {\n        products(params: $params) {\n            id\n            name\n            description\n            price\n        }\n    }\n    ": types.GetProductsDocument,
-    "\n        query getProduct($id: Int!) {\n            product(id: $id) {\n                id\n                name\n                description\n                price\n            }\n        }\n        ": types.GetProductDocument,
-    "\n    mutation removeProduct($id: Int!) {\n        removeProduct(id: $id) {\n            id\n            name\n        }\n    }\n    ": types.RemoveProductDocument,
-    "\n    query getUsers {\n        users {\n            id\n            name\n            password\n        }\n    }\n": types.GetUsersDocument,
+    "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) \n    }\n    ": types.SignUpDocument,
 };
 
 /**
@@ -40,31 +34,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            login,\n            email,\n            password\n        }\n    }\n    "): (typeof documents)["\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            login,\n            email,\n            password\n        }\n    }\n    "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    mutation createProduct($input: CreateProductInput!){\n        createProduct(createProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "): (typeof documents)["\n    mutation createProduct($input: CreateProductInput!){\n        createProduct(createProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    mutation updateProduct($input: UpdateProductInput!){\n        updateProduct(updateProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "): (typeof documents)["\n    mutation updateProduct($input: UpdateProductInput!){\n        updateProduct(updateProductInput: $input) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    query getProducts($params: Params) {\n        products(params: $params) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "): (typeof documents)["\n    query getProducts($params: Params) {\n        products(params: $params) {\n            id\n            name\n            description\n            price\n        }\n    }\n    "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n        query getProduct($id: Int!) {\n            product(id: $id) {\n                id\n                name\n                description\n                price\n            }\n        }\n        "): (typeof documents)["\n        query getProduct($id: Int!) {\n            product(id: $id) {\n                id\n                name\n                description\n                price\n            }\n        }\n        "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    mutation removeProduct($id: Int!) {\n        removeProduct(id: $id) {\n            id\n            name\n        }\n    }\n    "): (typeof documents)["\n    mutation removeProduct($id: Int!) {\n        removeProduct(id: $id) {\n            id\n            name\n        }\n    }\n    "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    query getUsers {\n        users {\n            id\n            name\n            password\n        }\n    }\n"): (typeof documents)["\n    query getUsers {\n        users {\n            id\n            name\n            password\n        }\n    }\n"];
+export function graphql(source: "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) \n    }\n    "): (typeof documents)["\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) \n    }\n    "];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

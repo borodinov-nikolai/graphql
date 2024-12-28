@@ -16,37 +16,38 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Auth = {
-  __typename?: 'Auth';
-  email?: Maybe<Scalars['String']['output']>;
-  login?: Maybe<Scalars['String']['output']>;
-  password?: Maybe<Scalars['String']['output']>;
+export type Category = {
+  __typename?: 'Category';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int']['output'];
 };
 
-export type CreateProductInput = {
-  description: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  price: Scalars['Int']['input'];
+export type CreateCategoryInput = {
+  email: Scalars['String']['input'];
+  /** Example field (placeholder) */
+  login: Scalars['Int']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type CreateUserInput = {
-  name?: InputMaybe<Scalars['String']['input']>;
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int']['input'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createProduct: Product;
+  createCategory: Category;
   createUser: User;
-  removeProduct?: Maybe<Product>;
-  removeUser?: Maybe<User>;
-  signUp?: Maybe<Auth>;
-  updateProduct: Product;
+  removeCategory: Category;
+  removeUser: User;
+  signUp: Scalars['Boolean']['output'];
+  updateCategory: Category;
   updateUser: User;
 };
 
 
-export type MutationCreateProductArgs = {
-  createProductInput: CreateProductInput;
+export type MutationCreateCategoryArgs = {
+  createCategoryInput: CreateCategoryInput;
 };
 
 
@@ -55,7 +56,7 @@ export type MutationCreateUserArgs = {
 };
 
 
-export type MutationRemoveProductArgs = {
+export type MutationRemoveCategoryArgs = {
   id: Scalars['Int']['input'];
 };
 
@@ -70,8 +71,8 @@ export type MutationSignUpArgs = {
 };
 
 
-export type MutationUpdateProductArgs = {
-  updateProductInput: UpdateProductInput;
+export type MutationUpdateCategoryArgs = {
+  updateCategoryInput: UpdateCategoryInput;
 };
 
 
@@ -79,34 +80,17 @@ export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
 };
 
-export type Params = {
-  sort?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Product = {
-  __typename?: 'Product';
-  description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  price?: Maybe<Scalars['Int']['output']>;
-};
-
 export type Query = {
   __typename?: 'Query';
-  product?: Maybe<Product>;
-  products: Array<Maybe<Product>>;
-  user?: Maybe<User>;
-  users: Array<Maybe<User>>;
+  categories: Array<Category>;
+  category: Category;
+  user: User;
+  users: Array<User>;
 };
 
 
-export type QueryProductArgs = {
+export type QueryCategoryArgs = {
   id: Scalars['Int']['input'];
-};
-
-
-export type QueryProductsArgs = {
-  params?: InputMaybe<Params>;
 };
 
 
@@ -120,22 +104,24 @@ export type SignUpInput = {
   password: Scalars['String']['input'];
 };
 
-export type UpdateProductInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
+export type UpdateCategoryInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
-  price?: InputMaybe<Scalars['Int']['input']>;
+  /** Example field (placeholder) */
+  login?: InputMaybe<Scalars['Int']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateUserInput = {
-  name: Scalars['String']['input'];
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']['input']>;
+  id: Scalars['Int']['input'];
 };
 
 export type User = {
   __typename?: 'User';
-  id?: Maybe<Scalars['Int']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  password?: Maybe<Scalars['String']['output']>;
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int']['output'];
 };
 
 export type SignUpMutationVariables = Exact<{
@@ -143,53 +129,7 @@ export type SignUpMutationVariables = Exact<{
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', signUp?: { __typename?: 'Auth', login?: string | null, email?: string | null, password?: string | null } | null };
-
-export type CreateProductMutationVariables = Exact<{
-  input: CreateProductInput;
-}>;
+export type SignUpMutation = { __typename?: 'Mutation', signUp: boolean };
 
 
-export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'Product', id?: number | null, name?: string | null, description?: string | null, price?: number | null } };
-
-export type UpdateProductMutationVariables = Exact<{
-  input: UpdateProductInput;
-}>;
-
-
-export type UpdateProductMutation = { __typename?: 'Mutation', updateProduct: { __typename?: 'Product', id?: number | null, name?: string | null, description?: string | null, price?: number | null } };
-
-export type GetProductsQueryVariables = Exact<{
-  params?: InputMaybe<Params>;
-}>;
-
-
-export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id?: number | null, name?: string | null, description?: string | null, price?: number | null } | null> };
-
-export type GetProductQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type GetProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id?: number | null, name?: string | null, description?: string | null, price?: number | null } | null };
-
-export type RemoveProductMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type RemoveProductMutation = { __typename?: 'Mutation', removeProduct?: { __typename?: 'Product', id?: number | null, name?: string | null } | null };
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id?: number | null, name?: string | null, password?: string | null } | null> };
-
-
-export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signUpInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"password"}}]}}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
-export const CreateProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateProductInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createProductInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<CreateProductMutation, CreateProductMutationVariables>;
-export const UpdateProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateProductInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"updateProductInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<UpdateProductMutation, UpdateProductMutationVariables>;
-export const GetProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProducts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"products"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<GetProductsQuery, GetProductsQueryVariables>;
-export const GetProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"product"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<GetProductQuery, GetProductQueryVariables>;
-export const RemoveProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"removeProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removeProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<RemoveProductMutation, RemoveProductMutationVariables>;
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"password"}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signUpInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;

@@ -3,7 +3,7 @@ import React from 'react'
 
 
 export const HomePage = () => {
-    redirect('/catalog')
+    redirect('/auth')
   
   return (
     <div>HomePage</div>

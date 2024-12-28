@@ -8,6 +8,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface SignUpInput {
+    login: string;
+    email: string;
+    password: string;
+}
+
 export interface CreateProductInput {
     name: string;
     description: string;
@@ -33,6 +39,22 @@ export interface UpdateUserInput {
     name: string;
 }
 
+export interface Auth {
+    login?: Nullable<string>;
+    email?: Nullable<string>;
+    password?: Nullable<string>;
+}
+
+export interface IMutation {
+    signUp(signUpInput: SignUpInput): Nullable<Auth> | Promise<Nullable<Auth>>;
+    createProduct(createProductInput: CreateProductInput): Product | Promise<Product>;
+    updateProduct(updateProductInput: UpdateProductInput): Product | Promise<Product>;
+    removeProduct(id: number): Nullable<Product> | Promise<Nullable<Product>>;
+    createUser(createUserInput: CreateUserInput): User | Promise<User>;
+    updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
+    removeUser(id: number): Nullable<User> | Promise<Nullable<User>>;
+}
+
 export interface Product {
     id?: Nullable<number>;
     name?: Nullable<string>;
@@ -45,15 +67,6 @@ export interface IQuery {
     product(id: number): Nullable<Product> | Promise<Nullable<Product>>;
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: number): Nullable<User> | Promise<Nullable<User>>;
-}
-
-export interface IMutation {
-    createProduct(createProductInput: CreateProductInput): Product | Promise<Product>;
-    updateProduct(updateProductInput: UpdateProductInput): Product | Promise<Product>;
-    removeProduct(id: number): Nullable<Product> | Promise<Nullable<Product>>;
-    createUser(createUserInput: CreateUserInput): User | Promise<User>;
-    updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
-    removeUser(id: number): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export interface User {

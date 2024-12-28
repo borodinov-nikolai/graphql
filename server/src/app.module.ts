@@ -8,11 +8,17 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 
 @Module({
   imports: [ConfigModule.forRoot({
     envFilePath: '.env'
+  }),
+  JwtModule.register({
+    global: true,
+    secret: process.env.JWT_SECRET
   }),
   GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
@@ -23,7 +29,8 @@ import { ProductsModule } from './products/products.module';
   }),
   DbModule,
   UsersModule,
-  ProductsModule
+  ProductsModule,
+  AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

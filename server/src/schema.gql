@@ -25,7 +25,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   removeCategory(id: Int!): Category!
   removeUser(id: Int!): User!
-  signUp(signUpInput: SignUpInput!): Boolean!
+  signUp(signUpInput: SignUpInput!): SignUpResponse!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
@@ -41,6 +41,10 @@ input SignUpInput {
   email: String!
   login: String!
   password: String!
+}
+
+type SignUpResponse {
+  jwt: String!
 }
 
 input UpdateCategoryInput {

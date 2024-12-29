@@ -19,6 +19,7 @@ const {register, handleSubmit} = useForm<SignUpInput>({
 
 const onSubmit: SubmitHandler<SignUpInput> = async (data)=> {
       const res = await signUp({variables: {input: data}})
+      console.log(res)
 }
            
   return (

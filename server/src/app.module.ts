@@ -23,7 +23,8 @@ import { UsersModule } from './users/users.module';
   GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    sortSchema: true
+    sortSchema: true,
+    context: ({ req, res }) => ({ req, res }), 
   }),
   CategoriesModule,
   AuthModule,

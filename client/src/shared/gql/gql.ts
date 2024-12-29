@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) \n    }\n    ": types.SignUpDocument,
+    "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n    ": types.SignUpDocument,
 };
 
 /**
@@ -34,7 +34,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) \n    }\n    "): (typeof documents)["\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) \n    }\n    "];
+export function graphql(source: "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n    "): (typeof documents)["\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n    "];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

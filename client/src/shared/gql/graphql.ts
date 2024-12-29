@@ -40,7 +40,7 @@ export type Mutation = {
   createUser: User;
   removeCategory: Category;
   removeUser: User;
-  signUp: Scalars['Boolean']['output'];
+  signUp: SignUpResponse;
   updateCategory: Category;
   updateUser: User;
 };
@@ -104,6 +104,11 @@ export type SignUpInput = {
   password: Scalars['String']['input'];
 };
 
+export type SignUpResponse = {
+  __typename?: 'SignUpResponse';
+  jwt: Scalars['String']['output'];
+};
+
 export type UpdateCategoryInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
@@ -129,7 +134,7 @@ export type SignUpMutationVariables = Exact<{
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', signUp: boolean };
+export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'SignUpResponse', jwt: string } };
 
 
-export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signUpInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
+export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signUpInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"}}]}}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;

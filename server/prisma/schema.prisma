@@ -16,8 +16,25 @@ datasource db {
 
 model User {
   id    Int @unique @default(autoincrement())
-  name  String
+  login  String @unique
+  email String @unique
   password String
+  confirmed Boolean @default(false)
+  banned Boolean @default(false)
+  role     Role @default(USER)
+  refreshToken RefreshToken?
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+model RefreshToken {
+  token  String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
 }
 
 model Product {

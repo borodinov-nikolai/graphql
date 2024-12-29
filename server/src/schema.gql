@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AuthResponse {
+  jwt: String!
+}
+
 type Category {
   """Example field (placeholder)"""
   exampleField: Int!
@@ -23,9 +27,10 @@ input CreateUserInput {
 type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createUser(createUserInput: CreateUserInput!): User!
+  refresh: AuthResponse!
   removeCategory(id: Int!): Category!
   removeUser(id: Int!): User!
-  signUp(signUpInput: SignUpInput!): SignUpResponse!
+  signUp(signUpInput: SignUpInput!): AuthResponse!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
@@ -33,6 +38,7 @@ type Mutation {
 type Query {
   categories: [Category!]!
   category(id: Int!): Category!
+  getMe: User!
   user(id: Int!): User!
   users: [User!]!
 }
@@ -41,10 +47,6 @@ input SignUpInput {
   email: String!
   login: String!
   password: String!
-}
-
-type SignUpResponse {
-  jwt: String!
 }
 
 input UpdateCategoryInput {
@@ -63,6 +65,7 @@ input UpdateUserInput {
 }
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  email: String!
+  id: Float!
+  login: String!
 }

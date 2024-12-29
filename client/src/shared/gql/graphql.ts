@@ -16,6 +16,11 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type AuthResponse = {
+  __typename?: 'AuthResponse';
+  jwt: Scalars['String']['output'];
+};
+
 export type Category = {
   __typename?: 'Category';
   /** Example field (placeholder) */
@@ -38,9 +43,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   createCategory: Category;
   createUser: User;
+  refresh: AuthResponse;
   removeCategory: Category;
   removeUser: User;
-  signUp: SignUpResponse;
+  signUp: AuthResponse;
   updateCategory: Category;
   updateUser: User;
 };
@@ -84,6 +90,7 @@ export type Query = {
   __typename?: 'Query';
   categories: Array<Category>;
   category: Category;
+  getMe: User;
   user: User;
   users: Array<User>;
 };
@@ -104,11 +111,6 @@ export type SignUpInput = {
   password: Scalars['String']['input'];
 };
 
-export type SignUpResponse = {
-  __typename?: 'SignUpResponse';
-  jwt: Scalars['String']['output'];
-};
-
 export type UpdateCategoryInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
@@ -125,8 +127,9 @@ export type UpdateUserInput = {
 
 export type User = {
   __typename?: 'User';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int']['output'];
+  email: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
+  login: Scalars['String']['output'];
 };
 
 export type SignUpMutationVariables = Exact<{
@@ -134,7 +137,13 @@ export type SignUpMutationVariables = Exact<{
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'SignUpResponse', jwt: string } };
+export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'AuthResponse', jwt: string } };
+
+export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMeQuery = { __typename?: 'Query', getMe: { __typename?: 'User', id: number, login: string, email: string } };
 
 
 export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signUpInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"}}]}}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
+export const GetMeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<GetMeQuery, GetMeQueryVariables>;

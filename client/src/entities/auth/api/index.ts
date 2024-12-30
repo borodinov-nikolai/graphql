@@ -9,3 +9,11 @@ export const SIGN_UP = graphql(`
         }
     }
     `)
+
+    export const REFRESH = graphql(`
+        query refresh {
+            refresh {
+                jwt
+            }
+        }
+        `)

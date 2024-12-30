@@ -27,7 +27,7 @@ export class AuthResolver {
     return { jwt: accessToken }
   }
 
-  @Mutation(() => AuthResponse)
+  @Query(() => AuthResponse)
   async refresh(@Context('res') res: Response, @Context('req') req: Request): Promise<AuthResponse> {
     const refreshToken = req.cookies.refreshToken
     const tokens = await this.authService.refresh(refreshToken)
@@ -39,7 +39,7 @@ export class AuthResolver {
 
 
   @UseGuards(RolesGuard)
-  @Roles([])
+  @Roles(['USER'])
   @Query(() => User)
   async getMe(@Context('req') req: Request) {
     const token = req.headers['authorization']?.split(' ')[1]

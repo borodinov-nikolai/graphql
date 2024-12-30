@@ -27,7 +27,6 @@ input CreateUserInput {
 type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createUser(createUserInput: CreateUserInput!): User!
-  refresh: AuthResponse!
   removeCategory(id: Int!): Category!
   removeUser(id: Int!): User!
   signUp(signUpInput: SignUpInput!): AuthResponse!
@@ -39,6 +38,7 @@ type Query {
   categories: [Category!]!
   category(id: Int!): Category!
   getMe: User!
+  refresh: AuthResponse!
   user(id: Int!): User!
   users: [User!]!
 }

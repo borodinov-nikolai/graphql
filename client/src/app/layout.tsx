@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ApolloProvider from "../shared/providers/apolloProvider";
 import './globals.css'
+import { Header } from "@/widgets/header";
 
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={'bg-[#708670]'} >
         <ApolloProvider>
+        <Header/>
         {children}
         </ApolloProvider>
       </body>

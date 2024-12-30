@@ -1,1 +1,1 @@
-export {SIGN_UP, SIGN_IN, TOKENS_REFRESH} from './api'
+export {SIGN_UP, SIGN_IN, SIGN_OUT, TOKENS_REFRESH} from './api'

@@ -1,1 +1,1 @@
-// export {CatalogPage} from '../catalogPage/ui/root'
+export {CatalogPage} from '../catalogPage/ui/root'

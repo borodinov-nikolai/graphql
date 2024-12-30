@@ -35,7 +35,7 @@ export class AuthResolver {
     return {jwt: accessToken}
   }
 
-  @Query(() => AuthResponse)
+  @Mutation(() => AuthResponse)
   async tokensRefresh(@Context('res') res: Response, @Context('req') req: Request): Promise<AuthResponse> {
     const refreshToken = req.cookies.jwt
     const tokens = await this.authService.refresh(refreshToken)
@@ -45,11 +45,17 @@ export class AuthResolver {
     }
   }
 
+  @Mutation(()=> Boolean)
+  async signOut(@Context('res') res: Response): Promise<boolean> {
+    res.clearCookie('jwt')
+    return true
+  }
+
 
   @UseGuards(RolesGuard)
   @Roles(['USER'])
   @Query(() => User)
-  async getMe(@Context('req') req: Request) {
+  async getMe(@Context('req') req: Request): Promise<User> {
     const token = req.headers['authorization']?.split(' ')[1]
     return await this.authService.getMe(token)
   }

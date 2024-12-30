@@ -19,6 +19,12 @@ input CreateCategoryInput {
   password: String!
 }
 
+input CreateProductInput {
+  description: String!
+  name: String!
+  price: Float!
+}
+
 input CreateUserInput {
   """Example field (placeholder)"""
   exampleField: Int!
@@ -26,20 +32,33 @@ input CreateUserInput {
 
 type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createProduct(createProductInput: CreateProductInput!): Product!
   createUser(createUserInput: CreateUserInput!): User!
   removeCategory(id: Int!): Category!
+  removeProduct(id: Int!): Product!
   removeUser(id: Int!): User!
   signIn(signInInput: SignInInput!): AuthResponse!
+  signOut: Boolean!
   signUp(signUpInput: SignUpInput!): AuthResponse!
+  tokensRefresh: AuthResponse!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Product {
+  description: String!
+  id: Float!
+  name: String!
+  price: Float!
 }
 
 type Query {
   categories: [Category!]!
   category(id: Int!): Category!
   getMe: User!
-  tokensRefresh: AuthResponse!
+  product(id: Int!): Product!
+  products: [Product!]!
   user(id: Int!): User!
   users: [User!]!
 }
@@ -62,6 +81,13 @@ input UpdateCategoryInput {
   """Example field (placeholder)"""
   login: Int
   password: String
+}
+
+input UpdateProductInput {
+  description: String
+  id: Int!
+  name: String
+  price: Float
 }
 
 input UpdateUserInput {

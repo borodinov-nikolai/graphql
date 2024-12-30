@@ -10,6 +10,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { AuthModule } from './auth/auth.module';
 import { DbModule } from './db/db.module';
 import { UsersModule } from './users/users.module';
+import { ProductsModule } from './products/products.module';
 
 
 @Module({
@@ -29,7 +30,8 @@ import { UsersModule } from './users/users.module';
   CategoriesModule,
   AuthModule,
   DbModule,
-  UsersModule
+  UsersModule,
+  ProductsModule
   ],
   controllers: [AppController],
   providers: [AppService],

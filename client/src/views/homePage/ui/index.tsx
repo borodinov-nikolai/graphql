@@ -1,20 +1,14 @@
 'use client'
-import { GET_ME } from '@/entities/users'
-import {useQuery } from '@apollo/client'
-import { redirect } from 'next/navigation'
 import React from 'react'
 
 
 export const HomePage = () => {
 
-    const {data, error} = useQuery(GET_ME)
-    console.log(data)
-
-    if(error) {
-      redirect('/auth')
-    }
-  
-  if(data) return (
-    <div>HomePage</div>
+return (
+    <main>
+      <div className={`px-[15px] py-[100px] xl:container xl:mx-auto xl:px-0 `} >
+        <h1 className={`text-[40px] text-center`} >Graphql</h1>
+      </div>
+    </main>
   )
 }

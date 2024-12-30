@@ -39,7 +39,7 @@ const ApolloProvider = ({ children }: { children: ReactNode }) => {
         return new Observable((observer) => {
           (async () => {
             try {
-              const res = await client.query({ query: TOKENS_REFRESH });
+              const res = await client.mutate({ mutation: TOKENS_REFRESH });
               const token = res?.data?.tokensRefresh?.jwt;
               if (token) {
                 localStorage.setItem('jwt', token);
@@ -61,7 +61,7 @@ const ApolloProvider = ({ children }: { children: ReactNode }) => {
                 observer.error(new Error('Не удалось обновить токен'));
               }
             } catch (error) {
-              console.error('Ошибка обновления токена:', error);
+              console.log('Ошибка обновления токена:', error);
               observer.error(error);
             }
           })();

@@ -18,8 +18,14 @@ export const SIGN_IN = graphql(`
     }
         `)
 
+export const SIGN_OUT = graphql(`
+    mutation signOut {
+        signOut
+    }
+    `)
+
 export const TOKENS_REFRESH = graphql(`
-        query tokensRefresh {
+        mutation tokensRefresh {
             tokensRefresh {
                 jwt
             }

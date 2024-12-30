@@ -45,6 +45,7 @@ export type Mutation = {
   createUser: User;
   removeCategory: Category;
   removeUser: User;
+  signIn: AuthResponse;
   signUp: AuthResponse;
   updateCategory: Category;
   updateUser: User;
@@ -71,6 +72,11 @@ export type MutationRemoveUserArgs = {
 };
 
 
+export type MutationSignInArgs = {
+  signInInput: SignInInput;
+};
+
+
 export type MutationSignUpArgs = {
   signUpInput: SignUpInput;
 };
@@ -90,7 +96,7 @@ export type Query = {
   categories: Array<Category>;
   category: Category;
   getMe: User;
-  refresh: AuthResponse;
+  tokensRefresh: AuthResponse;
   user: User;
   users: Array<User>;
 };
@@ -103,6 +109,11 @@ export type QueryCategoryArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['Int']['input'];
+};
+
+export type SignInInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type SignUpInput = {
@@ -139,10 +150,17 @@ export type SignUpMutationVariables = Exact<{
 
 export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'AuthResponse', jwt: string } };
 
-export type RefreshQueryVariables = Exact<{ [key: string]: never; }>;
+export type SignInMutationVariables = Exact<{
+  input: SignInInput;
+}>;
 
 
-export type RefreshQuery = { __typename?: 'Query', refresh: { __typename?: 'AuthResponse', jwt: string } };
+export type SignInMutation = { __typename?: 'Mutation', signIn: { __typename?: 'AuthResponse', jwt: string } };
+
+export type TokensRefreshQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TokensRefreshQuery = { __typename?: 'Query', tokensRefresh: { __typename?: 'AuthResponse', jwt: string } };
 
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -151,5 +169,6 @@ export type GetMeQuery = { __typename?: 'Query', getMe: { __typename?: 'User', i
 
 
 export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signUpInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"}}]}}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
-export const RefreshDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"refresh"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"refresh"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"}}]}}]}}]} as unknown as DocumentNode<RefreshQuery, RefreshQueryVariables>;
+export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signInInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
+export const TokensRefreshDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tokensRefresh"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tokensRefresh"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"}}]}}]}}]} as unknown as DocumentNode<TokensRefreshQuery, TokensRefreshQueryVariables>;
 export const GetMeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<GetMeQuery, GetMeQueryVariables>;

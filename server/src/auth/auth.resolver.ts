@@ -7,6 +7,7 @@ import { User } from 'src/users/entities/user.entity';
 import { UseGuards } from '@nestjs/common';
 import { RolesGuard } from './roles.guard';
 import { Roles } from './roles.decorator';
+import { SignInInput } from './dto/signIn.input';
 
 
 
@@ -23,16 +24,23 @@ export class AuthResolver {
   @Mutation(() => AuthResponse)
   async signUp(@Args('signUpInput') signUpInput: SignUpInput, @Context('res') res: Response): Promise<AuthResponse> {
     const { accessToken, refreshToken } = await this.authService.signUp(signUpInput)
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
+    res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
     return { jwt: accessToken }
   }
 
+  @Mutation(()=> AuthResponse)
+  async signIn(@Args('signInInput') signInINput: SignInInput, @Context('res') res: Response): Promise<AuthResponse> {
+    const {accessToken, refreshToken} = await this.authService.signIn(signInINput)
+    res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
+    return {jwt: accessToken}
+  }
+
   @Query(() => AuthResponse)
-  async refresh(@Context('res') res: Response, @Context('req') req: Request): Promise<AuthResponse> {
-    const refreshToken = req.cookies.refreshToken
+  async tokensRefresh(@Context('res') res: Response, @Context('req') req: Request): Promise<AuthResponse> {
+    const refreshToken = req.cookies.jwt
     const tokens = await this.authService.refresh(refreshToken)
     if (tokens) {
-      res.cookie('refreshToken', tokens.refreshToken, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
+      res.cookie('jwt', tokens.refreshToken, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
       return { jwt: tokens.accessToken }
     }
   }

@@ -1,19 +1,20 @@
 'use client'
-import { REFRESH } from '@/entities/auth/api'
 import { GET_ME } from '@/entities/users'
-import { useMutation, useQuery } from '@apollo/client'
+import {useQuery } from '@apollo/client'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
 
 export const HomePage = () => {
 
-    const me = useQuery(GET_ME)
-    // const res = useQuery(REFRESH)
+    const {data, error} = useQuery(GET_ME)
+    console.log(data)
 
-  console.log(me.data?.getMe.login)
+    if(error) {
+      redirect('/auth')
+    }
   
-  return (
+  if(data) return (
     <div>HomePage</div>
   )
 }

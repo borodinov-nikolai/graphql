@@ -8,11 +8,19 @@ export const SIGN_UP = graphql(`
             jwt
         }
     }
-    `)
+        `)
 
-    export const REFRESH = graphql(`
-        query refresh {
-            refresh {
+export const SIGN_IN = graphql(`
+    mutation signIn($input: SignInInput!) {
+        signIn(signInInput: $input) {
+            jwt
+        }      
+    }
+        `)
+
+export const TOKENS_REFRESH = graphql(`
+        query tokensRefresh {
+            tokensRefresh {
                 jwt
             }
         }

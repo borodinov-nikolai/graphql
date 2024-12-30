@@ -29,6 +29,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   removeCategory(id: Int!): Category!
   removeUser(id: Int!): User!
+  signIn(signInInput: SignInInput!): AuthResponse!
   signUp(signUpInput: SignUpInput!): AuthResponse!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   updateUser(updateUserInput: UpdateUserInput!): User!
@@ -38,9 +39,14 @@ type Query {
   categories: [Category!]!
   category(id: Int!): Category!
   getMe: User!
-  refresh: AuthResponse!
+  tokensRefresh: AuthResponse!
   user(id: Int!): User!
   users: [User!]!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
 }
 
 input SignUpInput {

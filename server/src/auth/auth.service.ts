@@ -4,6 +4,7 @@ import { UsersService } from 'src/users/users.service';
 import { SignUpInput } from './dto/signUp.unput';
 import * as bcrypt from 'bcrypt'
 import { TokenService } from './token.service';
+import { SignInInput } from './dto/signIn.input';
 
 @Injectable()
 export class AuthService {
@@ -24,6 +25,41 @@ export class AuthService {
         })
 
         return tokens
+     }
+
+     async signIn(data: SignInInput) {
+
+      const user = await this.db.user.findUnique({
+         where: {
+            email: data.email
+         }
+      })
+
+
+      if (!user) {
+         throw new UnauthorizedException("Wrong credentials")
+      }
+
+      const passwordCheck = await bcrypt.compare(data.password, user.password)
+      if (passwordCheck) {
+         const { id, login, role } = user
+         const tokens = await this.tokenService.createTokens({ id, login, role })
+         await this.db.refreshToken.upsert({
+            where: {
+               userId: id
+            },
+            update: {
+               token: tokens.refreshToken
+            },
+            create: {
+               userId: id,
+               token: tokens.refreshToken
+            }
+         })
+         return tokens
+      } else {
+         throw new UnauthorizedException("Wrong credentials")
+      }
      }
 
      async refresh(token?: string) {

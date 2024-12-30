@@ -14,8 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n    ": types.SignUpDocument,
-    "\n        query refresh {\n            refresh {\n                jwt\n            }\n        }\n        ": types.RefreshDocument,
+    "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n        ": types.SignUpDocument,
+    "\n    mutation signIn($input: SignInInput!) {\n        signIn(signInInput: $input) {\n            jwt\n        }      \n    }\n        ": types.SignInDocument,
+    "\n        query tokensRefresh {\n            tokensRefresh {\n                jwt\n            }\n        }\n        ": types.TokensRefreshDocument,
     "\n        query getMe {\n            getMe {\n                id\n                login\n                email\n            }\n        }\n    ": types.GetMeDocument,
 };
 
@@ -36,11 +37,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n    "): (typeof documents)["\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n    "];
+export function graphql(source: "\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n        "): (typeof documents)["\n    mutation signUp($input: SignUpInput!) {\n        signUp(signUpInput: $input) {\n            jwt\n        }\n    }\n        "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n        query refresh {\n            refresh {\n                jwt\n            }\n        }\n        "): (typeof documents)["\n        query refresh {\n            refresh {\n                jwt\n            }\n        }\n        "];
+export function graphql(source: "\n    mutation signIn($input: SignInInput!) {\n        signIn(signInInput: $input) {\n            jwt\n        }      \n    }\n        "): (typeof documents)["\n    mutation signIn($input: SignInInput!) {\n        signIn(signInInput: $input) {\n            jwt\n        }      \n    }\n        "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n        query tokensRefresh {\n            tokensRefresh {\n                jwt\n            }\n        }\n        "): (typeof documents)["\n        query tokensRefresh {\n            tokensRefresh {\n                jwt\n            }\n        }\n        "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

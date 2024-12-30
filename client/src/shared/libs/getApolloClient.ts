@@ -8,7 +8,7 @@ export const getApolloClient = ()=> {
         ssrMode: true,
         link: createHttpLink({
           uri: process.env.NEXT_PUBLIC_SERVER_API_URL,
-          credentials: 'same-origin'
+          credentials: 'include'
         }),
         cache: new InMemoryCache(),
       });

@@ -3,12 +3,13 @@ import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable, ApolloPr
 import React, { ReactNode } from 'react'
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
-import { REFRESH } from '@/entities/auth/api';
+import { TOKENS_REFRESH } from '@/entities/auth';
 
-const ApolloProvider = ({children} : {children: ReactNode}) => {
 
-  const getAuthToken = ()=> {
-    if(typeof window !== 'undefined') {
+const ApolloProvider = ({ children }: { children: ReactNode }) => {
+
+  const getAuthToken = () => {
+    if (typeof window !== 'undefined') {
       return localStorage.getItem('jwt')
     }
   }
@@ -17,7 +18,7 @@ const ApolloProvider = ({children} : {children: ReactNode}) => {
     uri: process.env.NEXT_PUBLIC_SERVER_API_URL,
     credentials: 'include'
   })
-  
+
   const authLink = setContext((_, { headers }) => {
     const token = getAuthToken();
     return {
@@ -28,20 +29,19 @@ const ApolloProvider = ({children} : {children: ReactNode}) => {
     };
   });
 
-  const errorLink = onError(({ graphQLErrors, operation, forward })=> {
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       const forbiddenError = graphQLErrors.find(
         ({ extensions }) => extensions?.code === 'FORBIDDEN'
       );
-  
+
       if (forbiddenError) {
         return new Observable((observer) => {
           (async () => {
             try {
-              const res = await client.query({ query: REFRESH });
-              const token = res?.data?.refresh?.jwt;
+              const res = await client.query({ query: TOKENS_REFRESH });
+              const token = res?.data?.tokensRefresh?.jwt;
               if (token) {
-                console.log('Новый токен:', token);
                 localStorage.setItem('jwt', token);
                 operation.setContext(({ headers = {} }) => ({
                   headers: {
@@ -69,15 +69,15 @@ const ApolloProvider = ({children} : {children: ReactNode}) => {
       }
     }
   })
-  
-    const client = new ApolloClient({
-            link: ApolloLink.from([authLink, errorLink, httpLink]),
-            cache: new InMemoryCache(),
-            credentials: 'include'
-          });
+
+  const client = new ApolloClient({
+    link: ApolloLink.from([authLink, errorLink, httpLink]),
+    cache: new InMemoryCache(),
+    credentials: 'include'
+  });
   return (
     <Provider client={client} >
-        {children}
+      {children}
     </Provider>
   )
 }

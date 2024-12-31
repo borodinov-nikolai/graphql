@@ -1,7 +1,8 @@
 'use client'
-import { CREATE_PRODUCT, GET_PRODUCTS } from '@/entities/product'
+import { CREATE_PRODUCT} from '@/entities/product'
 import { CreateProductInput } from '@/shared/gql/graphql'
 import { useMutation } from '@apollo/client'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -9,11 +10,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 
 const AddProduct = () => {
-  const [createProduct] = useMutation(CREATE_PRODUCT,
-    {
-      refetchQueries: [GET_PRODUCTS]
-    }
-  )
+  const router = useRouter()
+  const [createProduct] = useMutation(CREATE_PRODUCT)
     const {register, handleSubmit, reset} = useForm({
       defaultValues: {
         name: '',
@@ -25,8 +23,8 @@ const AddProduct = () => {
     const onSubmit: SubmitHandler<CreateProductInput> = async (data)=> {
           const res = await createProduct({variables: {input: {...data, price: +data.price}}})
           if('data' in res) {
-            console.log(res)
             reset()
+            router.refresh()
           }
 
     }

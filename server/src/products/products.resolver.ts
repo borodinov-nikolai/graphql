@@ -3,6 +3,9 @@ import { ProductsService } from './products.service';
 import { Product } from './entities/product.entity';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { GetProductsArgs } from './dto/get-products.args';
+
+
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -14,8 +17,8 @@ export class ProductsResolver {
   }
 
   @Query(() => [Product], { name: 'products' })
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Args() params: GetProductsArgs) {
+    return this.productsService.findAll(params);
   }
 
   @Query(() => Product, { name: 'product' })

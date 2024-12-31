@@ -24,8 +24,8 @@ export const UPDATE_PRODUCT = graphql(`
     `)
 
 export const GET_PRODUCTS = graphql(`
-    query getProducts {
-        products {
+    query getProducts($sort: sort) {
+        products(sort: $sort) {
             id,
             name,
             description,

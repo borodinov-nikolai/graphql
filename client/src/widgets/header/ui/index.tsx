@@ -3,9 +3,9 @@ import { SIGN_OUT } from '@/entities/auth'
 import { GET_ME } from '@/entities/users'
 import { useMutation, useQuery } from '@apollo/client'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
-
+import cs from 'classnames'
 
 const navItems = [
   {
@@ -19,6 +19,7 @@ const navItems = [
 ]
 
 export const Header = () => {
+  const pathname = usePathname()
   const router = useRouter()
   const {data, loading} = useQuery(GET_ME)
   console.log(loading, data)
@@ -28,7 +29,7 @@ export const Header = () => {
     }
   )
 
-  
+  console.log(pathname)
 
   const handleLogOut = async ()=> {
     await signOut()
@@ -44,7 +45,8 @@ export const Header = () => {
             {
               navItems.map(({label, href})=> (
                 <li key={href} className={`h-full`} >
-                  <Link href={href} className={`h-full flex items-center`} >{label}</Link>
+                  <Link href={ href !== pathname ? href : '#'} className={cs(`h-full flex items-center`, 
+                    href === pathname && 'border-b border-[black]')} >{label}</Link>
                 </li>
               ))
             }

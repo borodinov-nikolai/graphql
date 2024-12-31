@@ -58,7 +58,7 @@ type Query {
   category(id: Int!): Category!
   getMe: User!
   product(id: Int!): Product!
-  products: [Product!]!
+  products(sort: sort): [Product!]!
   user(id: Int!): User!
   users: [User!]!
 }
@@ -100,4 +100,9 @@ type User {
   email: String!
   id: Float!
   login: String!
+}
+
+enum sort {
+  asc
+  desc
 }

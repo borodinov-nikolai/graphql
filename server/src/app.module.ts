@@ -12,6 +12,7 @@ import { DbModule } from './db/db.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { UploadModule } from './upload/upload.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 
 
@@ -29,6 +30,9 @@ import { UploadModule } from './upload/upload.module';
     installSubscriptionHandlers: true,
     sortSchema: true,
     context: ({ req, res }) => ({ req, res }), 
+  }),
+  ServeStaticModule.forRoot({
+    rootPath: join(__dirname, 'uploads'),
   }),
   CategoriesModule,
   AuthModule,

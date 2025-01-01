@@ -43,3 +43,9 @@ model Product {
   description String
   price Float
 }
+
+model Image {
+  id   Int @unique @default(autoincrement())
+  name String
+  url  String
+}

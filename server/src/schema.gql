@@ -44,6 +44,7 @@ type Mutation {
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateUser(updateUserInput: UpdateUserInput!): User!
+  uploadFile(file: [Upload!]!): Boolean!
 }
 
 type Product {
@@ -95,6 +96,9 @@ input UpdateUserInput {
   exampleField: Int
   id: Int!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   email: String!

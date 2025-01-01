@@ -23,6 +23,7 @@ const documents = {
     "\n    query getProducts($sort: sort) {\n        products(sort: $sort) {\n            id,\n            name,\n            description,\n            price\n        }\n    }\n    ": types.GetProductsDocument,
     "\n    query getProduct($input: Int!) {\n        product(id: $input) {\n            id,\n            name,\n            description,\n            price\n        }\n    }\n    ": types.GetProductDocument,
     "\n    mutation removeProduct($input: Int!) {\n       removeProduct(id: $input) {\n        id\n       }        \n    }\n    ": types.RemoveProductDocument,
+    "\nmutation uploadFile($file: [Upload!]!) {\n    uploadFile(file: $file) \n}": types.UploadFileDocument,
     "\n        query getMe {\n            getMe {\n                id\n                login\n                email\n            }\n        }\n    ": types.GetMeDocument,
 };
 
@@ -76,6 +77,10 @@ export function graphql(source: "\n    query getProduct($input: Int!) {\n       
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    mutation removeProduct($input: Int!) {\n       removeProduct(id: $input) {\n        id\n       }        \n    }\n    "): (typeof documents)["\n    mutation removeProduct($input: Int!) {\n       removeProduct(id: $input) {\n        id\n       }        \n    }\n    "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nmutation uploadFile($file: [Upload!]!) {\n    uploadFile(file: $file) \n}"): (typeof documents)["\nmutation uploadFile($file: [Upload!]!) {\n    uploadFile(file: $file) \n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

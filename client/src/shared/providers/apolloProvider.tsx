@@ -4,6 +4,7 @@ import React, { ReactNode } from 'react'
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { TOKENS_REFRESH } from '@/entities/auth';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 
 
 const ApolloProvider = ({ children }: { children: ReactNode }) => {
@@ -14,9 +15,14 @@ const ApolloProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const httpLink = new HttpLink({
+
+
+  const uploadLink = createUploadLink({
     uri: process.env.NEXT_PUBLIC_SERVER_API_URL,
-    credentials: 'include'
+    credentials: 'include',
+    headers: {
+      "Apollo-Require-Preflight": "*"
+    }
   })
 
   const authLink = setContext((_, { headers }) => {
@@ -71,7 +77,7 @@ const ApolloProvider = ({ children }: { children: ReactNode }) => {
   })
 
   const client = new ApolloClient({
-    link: ApolloLink.from([authLink, errorLink, httpLink]),
+    link: ApolloLink.from([authLink, errorLink, uploadLink]),
     cache: new InMemoryCache(),
     credentials: 'include'
   });

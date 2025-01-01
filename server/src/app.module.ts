@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { DbModule } from './db/db.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
+import { UploadModule } from './upload/upload.module';
+
 
 
 @Module({
@@ -24,6 +26,7 @@ import { ProductsModule } from './products/products.module';
   GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    installSubscriptionHandlers: true,
     sortSchema: true,
     context: ({ req, res }) => ({ req, res }), 
   }),
@@ -31,9 +34,12 @@ import { ProductsModule } from './products/products.module';
   AuthModule,
   DbModule,
   UsersModule,
-  ProductsModule
+  ProductsModule,
+  UploadModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+
+}
